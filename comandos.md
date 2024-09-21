@@ -43,3 +43,24 @@ Conta o número total de registros (COUNT) na tabela 'aluno'.
 **SELECT nome FROM aluno UNION SELECT nome FROM professor;**
 
 Seleciona os nomes dos alunos e professores, removendo duplicatas e retornando um conjunto único de nomes presentes nas duas tabelas.
+
+## View
+
+**CREATE VIEW vw_aluno AS
+SELECT 
+    id, 
+    nome, 
+    nota1, 
+    nota2, 
+    nota3, 
+    nota4, 
+    (nota1 + nota2 + nota3 + nota4) / 4.0 AS media
+FROM aluno;**
+
+**SELECT * FROM vw_aluno;**
+
+**DROP VIEW vw_aluno;**
+
+
+SELECT * FROM aluno WHERE nome LIKE  'A%';
+SELECT * FROM aluno WHERE nome LIKE '%a';
