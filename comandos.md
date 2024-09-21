@@ -39,3 +39,7 @@ Calcula a soma total (SUM) de todas as notas da coluna 'nota1' dos alunos.
 **SELECT COUNT(*) FROM aluno;**
 
 Conta o número total de registros (COUNT) na tabela 'aluno'.
+
+**SELECT nome FROM aluno UNION SELECT nome FROM professor;**
+
+Seleciona os nomes dos alunos e professores, removendo duplicatas e retornando um conjunto único de nomes presentes nas duas tabelas.
