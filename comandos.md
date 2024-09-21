@@ -62,5 +62,22 @@ FROM aluno;**
 **DROP VIEW vw_aluno;**
 
 
-SELECT * FROM aluno WHERE nome LIKE  'A%';
-SELECT * FROM aluno WHERE nome LIKE '%a';
+**SELECT * FROM aluno WHERE nome LIKE  'A%';**
+
+**SELECT * FROM aluno WHERE nome LIKE '%a';**
+
+**SELECT DISTINCT nota1 FROM aluno;**
+
+**SELECT * FROM aluno LIMIT 10;**
+
+**SELECT * FROM aluno OFFSET 2 LIMIT 10;**
+
+**SELECT * FROM aluno WHERE nota1 in(6,7);**
+
+**SELECT * FROM aluno WHERE nota1 not in(6,7);**
+
+****
+
+****
+
+****
