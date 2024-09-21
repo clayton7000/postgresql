@@ -36,6 +36,12 @@ Retorna o menor valor (MIN) da coluna 'nota1' entre todos os alunos.
 
 Calcula a soma total (SUM) de todas as notas da coluna 'nota1' dos alunos.
 
+SELECT nome, (CASE 
+	   WHEN nota1 >= 5 THEN 'aprovado'
+	   WHEN nota1 < 5 THEN 'reprovado'
+	END) onibus
+FROM Aluno
+
 **SELECT COUNT(*) FROM aluno;**
 
 Conta o número total de registros (COUNT) na tabela 'aluno'.
@@ -114,3 +120,17 @@ Seleciona todos os registros e colunas da view vw_aluno, que contém as informa�
 **DROP VIEW vw_aluno;**
 
 Remove a view vw_aluno do banco de dados, sem afetar os dados da tabela aluno.
+
+**SELECT nome, (CASE 
+	   WHEN nota1 >= 5 THEN 'aprovado'
+	   WHEN nota1 < 5 THEN 'reprovado'
+	END) aprovado
+FROM Aluno**
+
+**SELECT COALESCE(nome, '') FROM aluno;**
+
+O comando seleciona a coluna nome da tabela aluno e utiliza a função COALESCE para substituir valores nulos.
+
+**SELECT NULLIF( nota1, 5) as nota_nullif FROM aluno;**
+
+Esse comando compara o valor da coluna nota1 da tabela aluno com o número 5. Se o valor de nota1 for igual a 5, o resultado será NULL.
