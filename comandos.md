@@ -98,6 +98,22 @@ Seleciona os nomes da turma e do professor, retornando todos os registros da tab
 
 Seleciona os nomes da turma e do professor, retornando todos os registros tanto da tabela turma quanto da tabela professor, independentemente de haver uma correspondência entre elas. Registros sem correspondência em uma das tabelas terão valores nulos.
 
+**SELECT nome, (CASE 
+	   WHEN nota1 >= 5 THEN 'aprovado'
+	   WHEN nota1 < 5 THEN 'reprovado'
+	END) aprovado
+FROM Aluno**
+
+Esse comando seleciona o nome dos alunos e, com base no valor da nota1, utiliza a estrutura CASE para criar uma nova coluna chamada aprovado. Se a nota1 for maior ou igual a 5, o valor da nova coluna será 'aprovado'; se for menor que 5, será 'reprovado'.
+
+**SELECT COALESCE(nome, '') FROM aluno;**
+
+O comando seleciona a coluna nome da tabela aluno e utiliza a função COALESCE para substituir valores nulos.
+
+**SELECT NULLIF( nota1, 5) as nota_nullif FROM aluno;**
+
+Esse comando compara o valor da coluna nota1 da tabela aluno com o número 5. Se o valor de nota1 for igual a 5, o resultado será NULL.
+
 ## View
 
 **CREATE VIEW vw_aluno AS
@@ -120,17 +136,3 @@ Seleciona todos os registros e colunas da view vw_aluno, que contém as informa�
 **DROP VIEW vw_aluno;**
 
 Remove a view vw_aluno do banco de dados, sem afetar os dados da tabela aluno.
-
-**SELECT nome, (CASE 
-	   WHEN nota1 >= 5 THEN 'aprovado'
-	   WHEN nota1 < 5 THEN 'reprovado'
-	END) aprovado
-FROM Aluno**
-
-**SELECT COALESCE(nome, '') FROM aluno;**
-
-O comando seleciona a coluna nome da tabela aluno e utiliza a função COALESCE para substituir valores nulos.
-
-**SELECT NULLIF( nota1, 5) as nota_nullif FROM aluno;**
-
-Esse comando compara o valor da coluna nota1 da tabela aluno com o número 5. Se o valor de nota1 for igual a 5, o resultado será NULL.
