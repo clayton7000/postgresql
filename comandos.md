@@ -136,3 +136,9 @@ Seleciona todos os registros e colunas da view vw_aluno, que contém as informa�
 **DROP VIEW vw_aluno;**
 
 Remove a view vw_aluno do banco de dados, sem afetar os dados da tabela aluno.
+
+## Index
+
+**CREATE INDEX teste ON aluno (nome)**
+
+Esse comando cria um índice chamado teste na coluna nome da tabela aluno. O índice melhora o desempenho das consultas que filtram ou ordenam os resultados com base na coluna nome, tornando essas operações mais rápidas.
