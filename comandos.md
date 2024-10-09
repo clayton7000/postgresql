@@ -142,3 +142,47 @@ Remove a view vw_aluno do banco de dados, sem afetar os dados da tabela aluno.
 **CREATE INDEX teste ON aluno (nome)**
 
 Esse comando cria um índice chamado teste na coluna nome da tabela aluno. O índice melhora o desempenho das consultas que filtram ou ordenam os resultados com base na coluna nome, tornando essas operações mais rápidas.
+
+## Function
+
+**CREATE OR REPLACE FUNCTION calcular_media(
+    n1 DECIMAL(5,2), 
+    n2 DECIMAL(5,2), 
+    n3 DECIMAL(5,2), 
+    n4 DECIMAL(5,2)
+)
+RETURNS DECIMAL(5,2) AS $$
+BEGIN
+    RETURN (n1 + n2 + n3 + n4) / 4.0;
+END;
+$$ LANGUAGE plpgsql;**
+
+CREATE OR REPLACE FUNCTION calcular_media: Cria uma função chamada calcular_media. Se a função já existir, ela será substituída.
+RETURNS DECIMAL(5, 2): Define que a função retorna um valor do tipo DECIMAL(5, 2).
+n1, n2, n3, n4: Esses são os parâmetros de entrada da função, representando as notas do aluno.
+RETURN (n1 + n2 + n3 + n4) / 4: A função calcula a média somando as quatro notas e dividindo por 4, retornando o resultado.
+
+## Trigger
+
+**CREATE OR REPLACE FUNCTION trigger_calcular_media()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Calcula a média das notas nota1, nota2, nota3, nota4 e armazena no campo media
+    NEW.media := calcular_media(NEW.nota1, NEW.nota2, NEW.nota3, NEW.nota4);
+    RETURN NEW;  -- Retorna o novo registro com o valor da média calculada
+END;
+$$ LANGUAGE plpgsql;**
+
+CREATE OR REPLACE FUNCTION trigger_calcular_media(): Cria uma função de trigger chamada trigger_calcular_media que será executada antes de cada inserção na tabela aluno.
+NEW.media := calcular_media(NEW.nota1, NEW.nota2, NEW.nota3, NEW.nota4);: Utiliza a função calcular_media para calcular a média das notas do novo registro que está sendo inserido. O valor é atribuído ao campo media do registro.
+RETURN NEW;: Retorna o registro atualizado com a média calculada.
+
+**CREATE TRIGGER trigger_before_insert_media
+BEFORE INSERT ON aluno
+FOR EACH ROW
+EXECUTE FUNCTION trigger_calcular_media();**
+
+CREATE TRIGGER trigger_before_insert_media: Cria uma trigger chamada trigger_before_insert_media.
+BEFORE INSERT ON aluno: A trigger será executada antes de uma inserção na tabela aluno.
+FOR EACH ROW: A trigger será executada para cada linha (registro) que for inserida.
+EXECUTE FUNCTION trigger_calcular_media(): Define que a função trigger_calcular_media será chamada sempre que a trigger for ativada.
